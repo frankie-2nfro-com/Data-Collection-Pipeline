@@ -8,5 +8,20 @@ I am working with horse racing data for several years and still interesting in d
 
 ## Milestone 2 - Prototype finding the individual page for each entry
 
-### Task 1 - Create a scraper class
+Many website using front rendering and cookie to limit accessing html directly from the http protocol althrogh it will be the most efficient way to capture the data. And now I will use selenium to get the source and content of the website. But it needs to sort out some way to increase the speed of capturing data later. 
+
+### Parser
+I will use BeautifulSoap and Regular Expression to parse inforamtion from the website. 
+
+### Extract, Transform and Load (ETL)
+I will divide the whole process into three parts namely Extract, Transform and Load. 
+
+#### Extract
+Get all html source files in the local repository 
+
+#### Transform
+Parse local source files and get need information to local database or files
+
+#### Load
+Load local dataset to the central database with all history data 
 
