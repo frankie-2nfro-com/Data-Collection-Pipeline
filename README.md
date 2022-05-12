@@ -20,7 +20,7 @@ I will divide the whole process into three parts namely Extract, Transform and L
 Get all html source files in the local repository 
 
 #### Transform
-Parse local source files and get need information to local database or files
+Parse local source files and get needed information to local database or files
 
 #### Load
 Load local dataset to the central database with all history data 
