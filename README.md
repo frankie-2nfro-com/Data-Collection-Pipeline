@@ -25,3 +25,7 @@ Parse local source files and get needed information to local database or files
 #### Load
 Load local dataset to the central database with all history data 
 
+## Milestone 3 - Retrieve data from details page
+
+To make the project to be highly reusable for different website scraping, I will try to using definition to define the scraping behaviours. As using BeautifulSoup and Regular expression is actually with specific required information to parsing information needed in the html. 
+
