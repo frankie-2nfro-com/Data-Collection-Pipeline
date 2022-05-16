@@ -59,4 +59,10 @@ In above code, it will 1) get source of "URL"; 2) Parse all cryptocurrency detai
 
 The implementation purpose is that the logic in each site would not be embedded to the main scraper class and can be reused for future data collection.
 
+To prove my method, I tried to define two set of scraper to capture two websites. One has six target webpages with hierarchy. After the main page, I will collect 36 subpages. In those subpages, it will have another detail pages for each and it will have multiple pages because of the pager. It totally collect  185 pages. Finally, In those pages, I will get needed links and then collect all pages. It is 7903 pages each for the rest of the pages. 
+
+And anoher website, I captured all links in main page. It is with pager and total have 10112 links. And then I capture all 10112 details and save images in the local directory. 
+
+And definition parser work well for my situation.
+
 
