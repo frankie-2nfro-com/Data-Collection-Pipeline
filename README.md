@@ -65,4 +65,37 @@ And anoher website, I captured all links in main page. It is with pager and tota
 
 And definition parser work well for my situation.
 
+## Milestone 4 - Documentation and testing
 
+All public method in the class will be unit tested in test cases. It will make sure all the functions produce expected result when passing in needed arguments. The unit test tool will be used is python build in unittest library. To better control the order of testing functions, it will arrange the order of execution by a TestSuite as follows
+
+```
+def suite():
+    suite = TestSuite()
+    suite.addTest(SiteExtractorTestCases('test_registerPage'))
+    suite.addTest(SiteExtractorTestCases('test_proceedCookie'))
+    suite.addTest(SiteExtractorTestCases('test_extractPages'))
+    suite.addTest(SiteExtractorTestCases('test_get_page_state'))
+    suite.addTest(SiteExtractorTestCases('test_add_pages_to_queue'))
+    suite.addTest(SiteExtractorTestCases('test_dequeue_parse_task'))
+    suite.addTest(SiteExtractorTestCases('test_get_queue_total_task'))
+    suite.addTest(SiteExtractorTestCases('test_bypass_task_in_queue'))
+    suite.addTest(SiteExtractorTestCases('test_handle_page_task'))
+    suite.addTest(SiteExtractorTestCases('test_load_site_data'))
+    suite.addTest(SiteExtractorTestCases('test_getDataFileList'))
+    return suite
+```
+
+To run the unit tests:
+
+```
+python -m unittest test_extractor.py -v
+
+..RUNNING EXTRACTION TASK: COIN_LIST_PAGE
+Task already finished. Loading COIN_LIST_PAGE from: ./COIN_CACHE/COIN_LIST.json
+.........
+----------------------------------------------------------------------
+Ran 11 tests in 39.464s
+
+OK
+```
