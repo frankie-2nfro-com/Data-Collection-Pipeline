@@ -99,3 +99,14 @@ Ran 11 tests in 39.464s
 
 OK
 ```
+
+## Milestone 5 - Scalably store the data
+Setting up AWS services is a big challenge for me as I had some bad experience getting large amount charged by amazon. So I setup carefully to make sure no unnecessary function added for this project to use Lambda, storage service and RDS. 
+
+### Services adoped in this project
+
+#### Storage for raw data and image data
+The scaper will save json and image file to S3 storage via boto3
+
+#### Relational database for tabular data
+The parsed data from scaper with uuid generated unique key will be transfered to the AWS RDS via psycopy2 and sqlalchemy
