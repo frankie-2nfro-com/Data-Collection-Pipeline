@@ -13,21 +13,12 @@ Many website using front-end rendering and cookie to limit accessing html direct
 ### Parser
 I will use BeautifulSoap and Regular Expression to parse inforamtion from the website. 
 
-### Extract, Transform and Load (ETL)
-I will divide the whole process into three parts namely Extract, Transform and Load. 
-
-#### Extract
-Get all html source files in the local repository 
-
-#### Transform
-Parse local source files and get needed information to local database or files
-
-#### Load
-Load local dataset to the central database with all history data 
+### Process
+I will divide the whole process into two steps. Firstly I will extract all page source file from my target website to local storage. After making sure all need webpages are downloaded, I will start the transform process to get needed information from the cached htmls.
 
 ## Milestone 3 - Retrieve data from details page
 
-To make the program to be highly reusable for different website scraping, I will try to using rule definition to define the scraping behaviours. As mention above in Milestone 2, I will extract webpages first. And then will parse all information needed in the "Transform" step. And "Load" all information to the data repository. 
+To make the program to be highly reusable for different website scraping, I will try to using rule definition to define the extraction behaviours. As mention above in Milestone 2, I will extract webpages first. And then will parse all information needed in the "Transform" step. 
 
 Here is an example how I define extraction behavour for a website:
 
@@ -110,3 +101,24 @@ The scaper will save json and image file to S3 storage via boto3
 
 #### Relational database for tabular data
 The parsed data from scaper with uuid generated unique key will be transfered to the AWS RDS via psycopy2 and sqlalchemy
+
+## Milestone 6 - Containerise scraper
+It is quite good to run scraper in Docker for easily replicate the environment. However, I need to consider how to handle the exception and other abnormal running issues. I may need to store the states in database for resuming the process. Another way is decomposite the scraping process in small parts and let different Docker images to handle to simplify the error handling. 
+
+## Milestone 7 - Make the scraping scalable
+In this milestone, I try to using Docker and EC2 instance to run my scraper in the Cloud. Using Docker allow me to deploy the changes easily. But I need to automate the whole process so that I can update the Docker image automatically and EC2 will keep running the latest version of my scraper. 
+
+### Scraper Optimization
+
+#### Cache mechanism
+When scraping web content, some pages are repeatedly linked. So to avoid duplicated scraping, I will use the key as the filename to make sure the file is nonexist before loading. It will reduce the traffic and resources for the scraper. 
+
+#### Relational Database
+Rather than using cache file named, data in relational database are easily to maintain the uniquenesses. The table primary key constrain make sure the record is single stored in the database. I setup a postgres in AWS so that the scraper running in EC2 can save data and states to this remoted database. 
+
+#### Exception
+Even unit test is passed in the previous milestone, it is still hard to ensure the running can finished normally as it is rely on a third party website. So it is important to have a way to resume the scraping process from break point instead of running from the beginning everytime. The progress state will be store to a local file. So the program will load it and run at the last break point. 
+
+
+
+
