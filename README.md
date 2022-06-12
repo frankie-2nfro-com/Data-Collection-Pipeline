@@ -1,5 +1,5 @@
 # Data-Collection-Pipeline
-This repository is for my AiCore project for data collection. 
+This repository is for my AiCore project which is developing a system for data collection. 
 
 And this README is for the description of this project and answering the questions of the project milestones. 
 
@@ -14,7 +14,7 @@ Many website using front-end rendering and cookie to limit accessing html direct
 I will use BeautifulSoap and Regular Expression to parse inforamtion from the website. 
 
 ### Process
-I will divide the whole process into two steps. Firstly I will extract all page source file from my target website to local storage. After making sure all need webpages are downloaded, I will start the transform process to get needed information from the cached htmls.
+I will divide the whole process into two steps. Firstly I will extract all page source files from my target website to local storage. After making sure all need webpages are downloaded, I will start the transform process to get needed information from the cached htmls.
 
 ## Milestone 3 - Retrieve data from details page
 
@@ -119,6 +119,57 @@ Rather than using cache file named, data in relational database are easily to ma
 #### Exception
 Even unit test is passed in the previous milestone, it is still hard to ensure the running can finished normally as it is rely on a third party website. So it is important to have a way to resume the scraping process from break point instead of running from the beginning everytime. The progress state will be store to a local file. So the program will load it and run at the last break point. 
 
+## Milestone 8 - Monitoring and alerting
 
+When I run my scraper in EC2 instance, I have to provide a way for me to know the health status of the remote cloud instance. In this project, I make use prometheus and grafana.
+
+### Prometheus
+It is a systems monitoring and alerting toolkit. I prepare a yml config for Prometheus and then run it with the docker image. 
+
+```python
+global:
+  scrape_interval: 15s # By default, scrape targets every 15 seconds.
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+    monitor: 'codelab-monitor'
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name added as a label `job=<job_name>` to any timeseries scraped
+  - job_name: 'prometheus'
+    # Override the global default and scrape targets from job every 5 seconds.
+    scrape_interval: '5s'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # OS monitoring
+  - job_name: 'wmiexporter'
+    scrape_interval: '30s'
+    static_configs:
+      - targets: ['localhost:9182']
+
+  # Docker monitoring
+  - job_name: 'docker'
+         # metrics_path defaults to '/metrics'
+         # scheme defaults to 'http'.
+    static_configs:
+      - targets: ['127.0.0.1:9323'] # metrics address from our daemon.json file
+```
+
+and I run it by the following command in EC2:
+
+```
+sudo docker run --rm -d --network=host \
+--name prometheus \
+-v /home/ec2-user/prometheus.yml:/etc/prometheus/prometheus.yml \
+prom/prometheus \
+--config.file=/etc/prometheus/prometheus.yml \
+--web.enable-lifecycle
+```
+
+### Grafana
+Grafana is only a visualization solution. Prometheus stores the time series infomation and provides different data to Grafana to display via a self-defined dashboard. So it is easier to visualized the overall status of the EC2 instance and the scraper status.
 
 
