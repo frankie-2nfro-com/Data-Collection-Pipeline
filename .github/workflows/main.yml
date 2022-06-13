@@ -39,5 +39,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/Data-Collection-Pipeline:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scraper:latest
           
