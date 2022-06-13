@@ -141,9 +141,22 @@ class HKJCExtractor(SiteExtractor):
 				'result'
 			]
 		).set_index(['trainer_code', 'race_code', 'horse_name'])
+
+		df2 = pd.DataFrame([], 
+			columns = [
+				"trainer_code", 
+				"last10_win",
+				"race_total",
+				"total_w",
+				"total_q",
+				"total_p",
+				"total_f",
+			]
+		).set_index("trainer_code")
+
 		db = Database()
-		df.to_sql('trainer_statistic', db.engine, if_exists='replace')
 		df.to_sql('trainer_race_horse', db.engine, if_exists='replace')
+		df2.to_sql('trainer_statistic', db.engine, if_exists='replace')
 		db.close()
 
 		# loop trainer
