@@ -136,4 +136,3 @@ COIN_DATA/
 testSoup.py
 requirements.in
 archives/*.*
-run_scraper.sh
