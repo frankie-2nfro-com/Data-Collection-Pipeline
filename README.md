@@ -172,4 +172,50 @@ prom/prometheus \
 ### Grafana
 Grafana is only a visualization solution. Prometheus stores the time series infomation and provides different data to Grafana to display via a self-defined dashboard. So it is easier to visualized the overall status of the EC2 instance and the scraper status.
 
+## Milestone 9 - Set up a CI/CD pipeline for your Docker image
+Github provides actions tool to define my CI/CD pipeline. I define the trigger event on "push" event. When I push update on "main" to my repository, it will trigger my CI/CD job which integrates my Docker Hub to update my docker image automatically. 
 
+```yml
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v1
+        
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scraper:latest
+```
+
+However, I need to make sure the credentials and password information safe throughout the whole process. I need to make sure no hardcode sensitive information in the source code. Finally I will put those information in runtime environment. So I need to prepare a running script in the EC2 instance. The script will not be enclosed in the github repository. So the sensitive information will not expose in the CI/CD process. 
