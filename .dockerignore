@@ -1,0 +1,11 @@
+CACHE/
+COIN_CACHE/
+COIN_DATA/
+*.log
+testSoup.py
+requirements.in
+archives/*.*
+screens/
+resources/
+__pycache__/
+run_scraper.sh

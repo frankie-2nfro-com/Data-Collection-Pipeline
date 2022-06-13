@@ -127,3 +127,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+CACHE/
+COIN_CACHE/
+COIN_DATA/
+*.log
+testSoup.py
+requirements.in
+archives/*.*
+run_scraper.sh
