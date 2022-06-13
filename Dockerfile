@@ -37,6 +37,4 @@ ENV DISPLAY=:99
 
 COPY . .
 RUN pip install -r requirements.txt
-
-RUN chmod +x run_scraper.sh
-RUN ./run_scraper.sh
+CMD ["/bin/sh", "run_scraper.sh"]
