@@ -218,4 +218,7 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scraper:latest
 ```
 
+After pushing update, my action run automatically as follows:
+![Run CI/CD screendump](https://github.com/frankie-2nfro-com/Data-Collection-Pipeline/blob/main/screens/cicd.png?raw=true)
+
 However, I need to make sure the credentials and password information safe throughout the whole process. I need to make sure no hardcode sensitive information in the source code. Finally I will put those information in runtime environment. So I need to prepare a running script in the EC2 instance. The script will not be enclosed in the github repository. So the sensitive information will not expose in the CI/CD process. 
