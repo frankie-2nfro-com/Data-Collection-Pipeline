@@ -8,4 +8,3 @@ archives/*.*
 screens/
 resources/
 __pycache__/
-run_scraper.sh
