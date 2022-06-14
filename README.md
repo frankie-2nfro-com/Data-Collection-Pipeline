@@ -169,6 +169,9 @@ prom/prometheus \
 --web.enable-lifecycle
 ```
 
+This is the screen of my prometheus:
+![Screen dump of prometheus](https://github.com/frankie-2nfro-com/Data-Collection-Pipeline/blob/main/screens/prometheus_monitor.png?raw=true)
+
 ### Grafana
 Grafana is only a visualization solution. Prometheus stores the time series infomation and provides different data to Grafana to display via a self-defined dashboard. So it is easier to visualized the overall status of the EC2 instance and the scraper status.
 
