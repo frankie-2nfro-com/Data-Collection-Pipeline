@@ -3,6 +3,9 @@ This repository is for my AiCore project which is developing a system for data c
 
 And this README is for the description of this project and answering the questions of the project milestones. 
 
+## Project Scope
+![Project Scope](https://github.com/frankie-2nfro-com/Data-Collection-Pipeline/blob/main/screens/scope.png?raw=true)
+
 ## Milestone 1 - Decide the website you are going to collect data from
 I am working with horse racing data for several years and still interesting in digging more 'useful knowledge' on this area. So I will try to collect data from a horse racing web site. I will try to learn again from AiCore and compare the method between mine and AiCore. And hope it will have some inspiration to improve my skill.
 
