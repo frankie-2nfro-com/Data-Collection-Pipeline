@@ -105,6 +105,9 @@ The parsed data from scaper with uuid generated unique key will be transfered to
 ## Milestone 6 - Containerise scraper
 It is quite good to run scraper in Docker for easily replicate the environment. However, I need to consider how to handle the exception and other abnormal running issues. I may need to store the states in database for resuming the process. Another way is decomposite the scraping process in small parts and let different Docker images to handle to simplify the error handling. 
 
+This is the process to push my docker image to Docker Hub:
+![Screen dump of pushing image to Docker Hub](https://github.com/frankie-2nfro-com/Data-Collection-Pipeline/blob/main/screens/docker_push.png?raw=true)
+
 ## Milestone 7 - Make the scraping scalable
 In this milestone, I try to using Docker and EC2 instance to run my scraper in the Cloud. Using Docker allow me to deploy the changes easily. But I need to automate the whole process so that I can update the Docker image automatically and EC2 will keep running the latest version of my scraper. 
 
