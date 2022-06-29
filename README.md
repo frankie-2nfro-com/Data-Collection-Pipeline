@@ -1,4 +1,4 @@
-# Data-Collection-Pipeline
+# AiCore Project #2 - Data-Collection-Pipeline
 This repository is for my AiCore project which is developing a system for data collection. 
 
 And this README is for the description of this project and answering the questions of the project milestones. 
